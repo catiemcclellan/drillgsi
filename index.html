@@ -12,6 +12,8 @@
 </head>
 <body>
 
+  <div class="progress-bar" id="progressBar"></div>
+
   <!-- NAV -->
   <nav class="nav" id="nav">
     <div class="nav-inner">
@@ -34,8 +36,8 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-content">
-      <div class="hero-badge">Est. 1988 &mdash; Herndon, Virginia</div>
+    <div class="hero-content hero-animate">
+      <div class="hero-badge">Est. 1988 &mdash; Northern Virginia</div>
       <h1 class="hero-title">
         Drilling Deep.<br>
         <span class="accent">Delivering Water.</span>
@@ -57,22 +59,22 @@
   <!-- STATS BAR -->
   <div class="stats-bar">
     <div class="stat fade-up">
-      <span class="stat-num">35+</span>
+      <span class="stat-num" data-count="35" data-suffix="+">35+</span>
       <span class="stat-label">Years in Business</span>
     </div>
     <div class="stat-divider"></div>
     <div class="stat fade-up" style="transition-delay:.1s">
-      <span class="stat-num">1988</span>
+      <span class="stat-num" data-count="1988">1988</span>
       <span class="stat-label">Year Established</span>
     </div>
     <div class="stat-divider"></div>
     <div class="stat fade-up" style="transition-delay:.2s">
-      <span class="stat-num">3</span>
+      <span class="stat-num" data-count="4">4</span>
       <span class="stat-label">States Served</span>
     </div>
     <div class="stat-divider"></div>
     <div class="stat fade-up" style="transition-delay:.3s">
-      <span class="stat-num">100%</span>
+      <span class="stat-num" data-count="100" data-suffix="%">100%</span>
       <span class="stat-label">Licensed &amp; Insured</span>
     </div>
   </div>
@@ -84,8 +86,8 @@
         <div class="about-text">
           <div class="section-label">About Us</div>
           <h2>Local Experts.<br>Trusted Since 1988.</h2>
-          <p>Groundwater Systems, Inc. is a locally owned and operated well drilling and pump installation contractor based in Herndon, Virginia. For over three decades, we&rsquo;ve built our reputation on reliable workmanship, honest service, and deep knowledge of regional groundwater conditions.</p>
-          <p>From single-family residential wells to large-scale commercial water systems, we bring professional standards and personal commitment to every project across the greater DMV region.</p>
+          <p>Groundwater Systems, Inc. is a locally owned and operated well drilling and pump installation contractor based in Northern Virginia. For over three decades, we&rsquo;ve built our reputation on reliable workmanship, honest service, and deep knowledge of regional groundwater conditions.</p>
+          <p>From single-family residential wells to large-scale commercial water systems, we bring professional standards and personal commitment to every project across Virginia, Maryland, D.C., and West Virginia.</p>
           <div class="about-creds">
             <div class="cred">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -192,9 +194,9 @@
       <div class="section-header">
         <div class="section-label">Where We Work</div>
         <h2>Serving the Greater DMV</h2>
-        <p>From Northern Virginia to suburban Maryland and the nation&rsquo;s capital &mdash; we&rsquo;re your regional groundwater experts.</p>
+        <p>From Northern Virginia to suburban Maryland, the nation&rsquo;s capital, and the Mountain State &mdash; we&rsquo;re your regional groundwater experts.</p>
       </div>
-      <div class="area-grid">
+      <div class="area-grid area-grid--4">
         <div class="area-card fade-up">
           <div class="area-abbr">VA</div>
           <h3>Virginia</h3>
@@ -209,6 +211,11 @@
           <div class="area-abbr">DC</div>
           <h3>Washington D.C.</h3>
           <p>Available for commercial water management and remediation projects in and around the District of Columbia.</p>
+        </div>
+        <div class="area-card fade-up" style="transition-delay:.3s">
+          <div class="area-abbr">WV</div>
+          <h3>West Virginia</h3>
+          <p>Serving residential and commercial clients throughout the Eastern Panhandle and surrounding West Virginia communities.</p>
         </div>
       </div>
       <p class="area-note">Not sure if we cover your area? <a href="tel:7036202040">Give us a call</a> &mdash; we&rsquo;re happy to discuss your project.</p>
@@ -267,8 +274,8 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
               </div>
               <div>
-                <span class="contact-label">Address</span>
-                <span class="contact-value">3159 Mary Etta Ln<br>Herndon, VA 20171</span>
+                <span class="contact-label">Location</span>
+                <span class="contact-value">Northern Virginia</span>
               </div>
             </div>
             <div class="contact-item">
@@ -338,7 +345,7 @@
         </div>
         <div class="footer-contact-info">
           <a href="tel:7036202040">(703) 620-2040</a>
-          <span>3159 Mary Etta Ln, Herndon VA</span>
+          <span>Northern Virginia</span>
           <span>Mon&ndash;Fri &middot; 7AM&ndash;5PM</span>
         </div>
       </div>
@@ -349,21 +356,23 @@
   </footer>
 
   <script>
-    // Sticky nav
+    // ── Scroll progress bar ──
+    const progressBar = document.getElementById('progressBar');
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 60);
-    });
+      const scrolled = window.scrollY;
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.width = (total > 0 ? (scrolled / total) * 100 : 0) + '%';
+      nav.classList.toggle('scrolled', scrolled > 60);
+    }, { passive: true });
 
-    // Mobile nav toggle
+    // ── Mobile nav ──
     const toggle = document.getElementById('navToggle');
     const navLinks = document.getElementById('navLinks');
     toggle.addEventListener('click', () => {
       navLinks.classList.toggle('open');
       toggle.classList.toggle('open');
     });
-
-    // Close mobile nav on link click
     navLinks.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => {
         navLinks.classList.remove('open');
@@ -371,24 +380,38 @@
       });
     });
 
-    // Smooth scroll
+    // ── Smooth scroll ──
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
         const target = document.querySelector(a.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
       });
     });
 
-    // Fade-in on scroll
+    // ── Animated counters ──
+    function animateCounter(el) {
+      const target = parseInt(el.dataset.count);
+      const suffix = el.dataset.suffix || '';
+      const start  = target > 100 ? Math.floor(target * 0.88) : 0;
+      const duration = 1600;
+      const t0 = performance.now();
+      const tick = now => {
+        const p = Math.min((now - t0) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.floor(start + (target - start) * eased) + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+        else el.textContent = target + suffix;
+      };
+      requestAnimationFrame(tick);
+    }
+
+    // ── Fade-in + counter trigger ──
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('visible');
+        entry.target.querySelectorAll('[data-count]').forEach(animateCounter);
+        observer.unobserve(entry.target);
       });
     }, { threshold: 0.12 });
 
