@@ -715,9 +715,12 @@ a.contact-value:hover { color: var(--green-bright); }
   .stats-bar     { flex-wrap: wrap; }
   .stat          { flex: 1 1 45%; padding: 22px 24px; }
   .stat-divider  { display: none; }
-  .area-grid--4  { grid-template-columns: 1fr 1fr; }
+  .area-grid,
+  .area-grid--4  { grid-template-columns: 1fr; }
   .services-grid { gap: 1px; }
   .service-card  { padding: 32px 24px; }
   .contact-form-wrap { padding: 24px 20px; }
   .form-row      { grid-template-columns: 1fr; }
+  .team-grid     { max-width: 100%; }
+  .section-header { margin-bottom: 40px; }
 }
