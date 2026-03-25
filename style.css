@@ -238,6 +238,7 @@ h3 { font-size: 1.2rem; letter-spacing: 0.04em; }
 }
 .hero-title { margin-bottom: 22px; max-width: 720px; }
 .hero-title .accent { color: var(--green-bright); }
+.hero-title sub { font-size: 0.5em; vertical-align: sub; }
 .hero-sub {
   font-size: 1.1rem;
   font-weight: 300;
